@@ -1,354 +1,547 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find the Best Roofer Near You</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Concrete Masters - Professional concrete contractors in West Valley City, Utah. Specializing in residential and commercial concrete services with free estimates.">
-    <meta name="keywords" content="concrete, contractor, Utah, West Valley City, driveway, foundation, construction">
-    <title>Concrete Masters | West Valley City Concrete Contractors</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary-color: #8ED250;
-        }
-        
-        body {
-            background-color: var(--primary-color);
-         
-        }
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W54XX2MDF4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W54XX2MDF4');
+    gtag('config', 'AW-11337578068');
+  </script>
 
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5cdabbd7a94db2399374.jpeg') center/cover;
-            min-height: 70vh;
-        }
-
-        .bg-primary {
-            background-color: var(--primary-color) !important;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        .carousel-item img {
-            height: 500px;
-            object-fit: cover;
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            color: #2c3e50;
-        }
-
-        .testimonial-card {
-            background: #ffffff;
-            border-radius: 15px;
-            transition: transform 0.3s;
-        }
-
-        .map-container {
-            height: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-    </style>
+  <style>
+    /* Reset body background – video will be our background */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: none;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Video Background Styles */
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      object-fit: cover;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+    /* Optional: add a dark gradient overlay on top of the video */
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* Container and other content */
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+      margin: 20px auto;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      color: #2c4c6c;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+    }
+    .btn {
+      padding: 15px 40px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      background: #218838;
+    }
+    .slide {
+      display: none;
+      padding: 25px;
+      position: relative;
+    }
+    .slide.active {
+      display: block;
+    }
+    .form-group {
+      margin: 25px 0;
+    }
+    .form-group label {
+      display: block;
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: #2c4c6c;
+      font-weight: 600;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus, .form-group select:focus {
+      border-color: #28a745;
+      outline: none;
+    }
+    .next-btn {
+      padding: 12px 30px;
+      background: #2c4c6c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 20px;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .next-btn:not(:disabled) {
+      opacity: 1;
+      background: #28a745;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #eee;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #28a745;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 30px 0;
+    }
+    .trust-badge {
+      width: 80px;
+      opacity: 0.8;
+    }
+    .testimonial {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 25px 0;
+      text-align: left;
+    }
+    .error-message {
+      color: #dc3545;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: none;
+    }
+    input:invalid, select:invalid {
+      border-color: #dc3545;
+    }
+    input:valid, select:valid {
+      border-color: #28a745;
+    }
+    .autocomplete-container {
+      position: relative;
+    }
+    .pac-container {
+      z-index: 10000 !important;
+    }
+    /* Mobile-specific styles */
+    @media only screen and (max-width: 900px) {
+      .container {
+        padding: 20px;
+        width: 95%;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      p {
+        font-size: 1em;
+      }
+      .btn {
+        padding: 10px 20px;
+        font-size: 1em;
+      }
+      .form-group label {
+        font-size: 1em;
+        margin-bottom: 10px;
+      }
+      .form-group input, .form-group select {
+        font-size: 0.9em;
+        padding: 10px;
+      }
+      .next-btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+      }
+      .trust-badge {
+        width: 60px;
+      }
+      .testimonial {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5ceb1c6f393f67f815fe.png" 
-                     alt="Concrete Masters Logo" 
-                     height="60">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="#quote">Get Quote</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-section text-white d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h1 class="display-4 mb-4">West Valley City's Premier Concrete Experts</h1>
-                    <p class="lead mb-4">Fully licensed & insured concrete contractors serving Utah since 2023</p>
-                    <a href="#quote" class="btn btn-primary btn-lg">Get Free Estimate</a>
-                </div>
-            </div>
-        </div>
-    </header>
+  <!-- Video Background -->
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <!-- Replace the src attribute below with the existing video source from your GHL website builder -->
+    <source src="https://storage.googleapis.com/msgsndr/p5ZKXWEUephwwTsEQZgU/media/67ae81be6e5839fedc2aaa4d.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <!-- Optional dark overlay -->
+  <div class="video-overlay"></div>
 
-    <!-- Services -->
-    <section id="services" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Our Concrete Services</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="text-center p-4 border rounded">
-                        <i class="bi bi-house-door service-icon"></i>
-                        <h3>Residential Concrete</h3>
-                        <p>Driveways, patios, foundations, and custom home solutions</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="text-center p-4 border rounded">
-                        <i class="bi bi-building service-icon"></i>
-                        <h3>Commercial Concrete</h3>
-                        <p>Parking lots, flooring, and industrial concrete solutions</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="text-center p-4 border rounded">
-                        <i class="bi bi-tools service-icon"></i>
-                        <h3>Repair & Maintenance</h3>
-                        <p>Crack repair, surface leveling, and concrete restoration</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Step 1: Value Proposition -->
+  <div class="container" id="step1">
+    <h1>Get Matched With Top-Rated Roofers in Your Area</h1>
+    <p style="font-size: 1.1em; line-height: 1.6; color: #555;">
+      We partner with certified roofing professionals to deliver quality service. Whether you need repairs, replacements, 
+      or insurance claims assistance, we'll match you with the best local experts.<br>
+      <span style="display: block; margin-top: 15px; color: #28a745; font-weight: bold;">✓ Free Quotes &nbsp; ✓ 100% Satisfaction Guarantee &nbsp; ✓ 24/7 Support</span>
+    </p>
+    
+    <div class="trust-badges">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Better_Business_Bureau.svg" class="trust-badge" alt="BBB Accredited">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/GAF_logo.svg" class="trust-badge" alt="GAF Certified">
+    </div>
 
-    <!-- Gallery Carousel -->
-    <section id="gallery" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Our Work</h2>
-            <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5cdabbd7a94db2399374.jpeg" class="d-block w-100" alt="Concrete work">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5cdabbd7a99493399375.jpeg" class="d-block w-100" alt="Concrete work">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5cdad7eb140ff948387c.jpeg" class="d-block w-100" alt="Concrete work">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5cda1c6f39ca05f815f0.jpeg" class="d-block w-100" alt="Concrete work">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5cda45a5459dd7901c21.jpeg" class="d-block w-100" alt="Concrete work">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5cdabbd7a9de10399372.jpeg" class="d-block w-100" alt="Concrete work">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/sAo868vwC2PkASf6lW0Q/media/681a5cdabbd7a977a6399373.jpeg" class="d-block w-100" alt="Concrete work">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/knES3eSWYIsc5YSZ3YLl/media/62beef4f9f43b0c53e585a8f.jpeg" class="d-block w-100" alt="Concrete work">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </section>
+    <button class="btn" onclick="showStep2()">Get Your Free Match Now</button>
 
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Customer Reviews</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="testimonial-card p-4">
-                        <p>"Outstanding work on our new driveway! Professional crew and excellent communication."</p>
-                        <h5>- Sarah J.</h5>
-                        <div class="text-warning">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card p-4">
-                        <p>"Quick response and fair pricing. Our commercial flooring project was completed ahead of schedule."</p>
-                        <h5>- Mike T.</h5>
-                        <div class="text-warning">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card p-4">
-                        <p>"Transformed our backyard with a beautiful stamped concrete patio. Highly recommend!"</p>
-                        <h5>- Emily R.</h5>
-                        <div class="text-warning">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="testimonial">
+      <p>"They connected me with 3 qualified roofers within hours. Saved me $1,200 compared to other quotes!"</p>
+      <p style="font-weight: bold;">— Sarah J., Phoenix AZ</p>
+    </div>
+  </div>
 
-    <!-- Lead Capture Form -->
-    <section id="quote" class="py-5 bg-light">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4">
-                    <h2>Get Your Free Quote</h2>
-                    <p class="lead">Complete our simple form and receive a detailed estimate within 24 hours</p>
-                    <div class="mt-4">
-                        <h5><i class="bi bi-check2-circle"></i> Licensed & Insured</h5>
-                        <h5><i class="bi bi-check2-circle"></i> 5-Year Workmanship Guarantee</h5>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <form id="leadForm" class="row g-3 bg-white p-4 rounded shadow">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" id="name" placeholder="Full Name" required>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" class="form-control" id="email" placeholder="Email" required>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="tel" class="form-control" id="phone" placeholder="Phone Number" required>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" id="address" placeholder="Address" required>
-                        </div>
-                        <div class="col-12">  
-                            <textarea class="form-control" id="message" rows="4" placeholder="Project Details"></textarea>
-                        </div>
-                        <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-primary btn-lg">Submit Request</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Step 2: Questionnaire -->
+  <div class="container" id="step2" style="display: none;">
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
 
-    <!-- Map -->
-    <section class="py-5">
-        <div class="container">
-            <div class="map-container">
-                <iframe src="https://maps.google.com/maps?q=2692s%202670w%20%23321%20West%20valley%20city%20UT%2084119&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                </iframe>
-            </div>
-        </div>
-    </section>
+    <!-- Slide 1: ZIP Code with City/State Display -->
+    <div class="slide active" id="slide1">
+      <div class="form-group">
+        <label>Where is your property located?</label>
+        <input type="text" id="zipcode" placeholder="Enter ZIP Code" required>
+        <div id="locationDisplay" style="margin-top:10px; font-size:1em; color: #2c4c6c;"></div>
+      </div>
+      <button class="next-btn" onclick="nextSlide()" disabled>Next →</button>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <h4>Contact Us</h4>
-                    <p>2692s 2670w #321<br>
-                    West Valley City, UT 84119<br>
-                    Phone: (801) 555-1234<br>
-                    Email: contact@concretemasters.com</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Quick Links</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#services" class="text-white">Services</a></li>
-                        <li><a href="#quote" class="text-white">Free Quote</a></li>
-                        <li><a href="privacy.html" class="text-white">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                    <div class="mt-3">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/BBB_Logo.svg/100px-BBB_Logo.svg.png" alt="BBB Accredited" width="80">
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-4 pt-3 border-top">
-                <small>© 2023 Concrete Masters. All rights reserved. Utah License #CON12345</small>
-            </div>
-        </div>
-    </footer>
+    <!-- Slide 2: Damage Status -->
+    <div class="slide" id="slide2">
+      <div class="form-group">
+        <label>Is this for damage repair or routine maintenance?</label>
+        <select id="damage" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="storm">Storm/Hail Damage</option>
+          <option value="leak">Leak Repair</option>
+          <option value="age">Aged Roof Replacement</option>
+          <option value="preventative">Preventative Maintenance</option>
+        </select>
+      </div>
+      <button class="next-btn" onclick="nextSlide()" disabled>Next →</button>
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Initialize Google Places Autocomplete
-        function initAutocomplete() {
-            const addressInput = document.getElementById('address');
-            const autocomplete = new google.maps.places.Autocomplete(addressInput, {
-                componentRestrictions: { country: ['us'] },
-                fields: ['address_components', 'geometry'],
-                types: ['address']
-            });
+    <!-- Slide 3: Insurance -->
+    <div class="slide" id="slide3">
+      <div class="form-group">
+        <label>Will this project involve insurance?</label>
+        <select id="insurance" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="yes">Yes - I need help with claims</option>
+          <option value="no">No - Paying out of pocket</option>
+          <option value="unsure">Not Sure Yet</option>
+        </select>
+      </div>
+      <button class="next-btn" onclick="nextSlide()" disabled>Next →</button>
+    </div>
+
+    <!-- Slide 4: Timeline -->
+    <div class="slide" id="slide4">
+      <div class="form-group">
+        <label>When do you need service?</label>
+        <select id="timeline" required>
+          <option value="" disabled selected>Select timeline</option>
+          <option value="emergency">Immediately (24-48 hrs)</option>
+          <option value="1week">Within 1 Week</option>
+          <option value="1month">Within 1 Month</option>
+          <option value="flexible">Flexible Timeline</option>
+        </select>
+      </div>
+      <button class="next-btn" onclick="nextSlide()" disabled>Next →</button>
+    </div>
+
+    <!-- Slide 5: Address (New Slide) -->
+    <div class="slide" id="slide5">
+      <div class="form-group">
+        <label>Please enter your street address</label>
+        <div class="autocomplete-container">
+          <input type="text" id="address" placeholder="Street Address" required>
+          <div class="error-message" id="address-error">Please enter a valid address</div>
+        </div>
+      </div>
+      <button class="next-btn" onclick="nextSlide()" disabled>Next →</button>
+    </div>
+
+    <!-- Slide 6: Contact Info -->
+    <div class="slide" id="slide6">
+      <div class="form-group">
+        <label>How should contractors reach you?</label>
+        <input type="text" id="name" placeholder="Full Name" required>
+        <div class="error-message" id="name-error">Please enter your full name</div>
+
+        <input type="email" id="email" placeholder="Email Address" style="margin-top:15px;">
+        <div class="error-message" id="email-error">Please enter a valid email address</div>
+
+        <input type="tel" id="phone" placeholder="Phone Number (XXX-XXX-XXXX)" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="margin-top:15px;" required>
+        <div class="error-message" id="phone-error">Please enter a valid phone number</div>
+      </div>
+      <p style="font-size:0.9em; margin-top:15px;">We promise we won't send you promotions or sell your information!</p>
+      <div class="testimonial" style="margin-top:25px;">
+        <p>"We value your privacy. By submitting, you agree to our <a href="#">terms</a> and consent to up to 4 roofing partners contacting you."</p>
+      </div>
+      <button class="next-btn" onclick="validateFinalForm()">Get My Free Quotes</button>
+    </div>
+  </div>
+
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoiftHq-lSNXLP4fUrkFro7FjhIyddxVI&libraries=places"></script>
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 6;
+    // Record start time for each slide (in milliseconds)
+    let slideStartTime = Date.now();
+
+    // Initialize Google Maps Autocomplete for the address field
+    function initAutocomplete() {
+      const autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('address'),
+        {types: ['address']}
+      );
+      
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (!place.geometry) {
+          document.getElementById('address-error').style.display = 'block';
+        } else {
+          document.getElementById('address-error').style.display = 'none';
         }
+      });
+    }
 
-        // Form Submission Handler
-        document.getElementById('leadForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                address: document.getElementById('address').value,
-                message: document.getElementById('message').value
-            };
-
-            try {
-                const response = await fetch('https://services.leadconnectorhq.com/hooks/sAo868vwC2PkASf6lW0Q/webhook-trigger/3c5e4a4a-c919-4633-bc79-d943faaa0e51', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    alert('Thank you! Your request has been submitted.');
-                    document.getElementById('leadForm').reset();
-                } else {
-                    alert('There was an error submitting your form. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('There was a network error. Please try again.');
+    // Geocode the entered ZIP Code to display city and state
+    function geocodeZip() {
+      const zip = document.getElementById('zipcode').value.trim();
+      if (zip.length !== 5) {
+        document.getElementById('locationDisplay').innerHTML = '';
+        return;
+      }
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: zip + ', USA' }, function(results, status) {
+        if (status === 'OK' && results[0]) {
+          let city = '';
+          let state = '';
+          results[0].address_components.forEach(component => {
+            if (component.types.indexOf("locality") !== -1) {
+              city = component.long_name;
             }
+            if (component.types.indexOf("administrative_area_level_1") !== -1) {
+              state = component.short_name;
+            }
+          });
+          if (city && state) {
+            document.getElementById('locationDisplay').innerHTML = city + ', ' + state;
+          } else {
+            document.getElementById('locationDisplay').innerHTML = '';
+          }
+        } else {
+          document.getElementById('locationDisplay').innerHTML = '';
+        }
+      });
+    }
+
+    function showStep2() {
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+      updateProgress();
+    }
+
+    function nextSlide() {
+      // Calculate and track time spent on current slide
+      const now = Date.now();
+      const timeSpent = (now - slideStartTime) / 1000; // in seconds
+      gtag('event', 'slide_time', {
+        'event_category': 'Engagement',
+        'event_label': 'Slide ' + currentSlide,
+        'value': timeSpent
+      });
+
+      document.getElementById(`slide${currentSlide}`).classList.remove('active');
+      currentSlide++;
+      document.getElementById(`slide${currentSlide}`).classList.add('active');
+      updateProgress();
+      updateNextButton();
+      // Reset timer for the new slide
+      slideStartTime = Date.now();
+    }
+
+    function updateProgress() {
+      const progress = (currentSlide / totalSlides) * 100;
+      document.getElementById('progress').style.width = `${progress}%`;
+    }
+
+    function updateNextButton() {
+      const inputs = document.querySelectorAll(`#slide${currentSlide} input, #slide${currentSlide} select`);
+      const nextButton = document.querySelector(`#slide${currentSlide} .next-btn`);
+
+      let allFilled = true;
+      inputs.forEach(input => {
+        if (input.required && !input.value) allFilled = false;
+      });
+
+      nextButton.disabled = !allFilled;
+    }
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    function validatePhone(phone) {
+      const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+      return re.test(phone);
+    }
+
+    function validateFinalForm() {
+      document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+      let isValid = true;
+
+      // Validate name
+      const name = document.getElementById('name');
+      if (!name.value.trim()) {
+        document.getElementById('name-error').style.display = 'block';
+        isValid = false;
+      }
+
+      // Validate email if provided (email is optional)
+      const email = document.getElementById('email');
+      if (email.value.trim() && !validateEmail(email.value)) {
+        document.getElementById('email-error').style.display = 'block';
+        isValid = false;
+      }
+
+      // Validate phone
+      const phone = document.getElementById('phone');
+      if (!validatePhone(phone.value)) {
+        document.getElementById('phone-error').style.display = 'block';
+        isValid = false;
+      }
+
+      // Validate address (from Slide 5)
+      const address = document.getElementById('address');
+      if (!address.value.trim()) {
+        document.getElementById('address-error').style.display = 'block';
+        isValid = false;
+      }
+
+      if (isValid) submitForm();
+    }
+
+    async function submitForm() {
+      const formData = {
+        zipcode: document.getElementById('zipcode').value,
+        damage_type: document.getElementById('damage').value,
+        insurance: document.getElementById('insurance').value,
+        timeline: document.getElementById('timeline').value,
+        address: document.getElementById('address').value.trim(),
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim()
+      };
+
+      try {
+        const response = await fetch('https://services.leadconnectorhq.com/hooks/p5ZKXWEUephwwTsEQZgU/webhook-trigger/26f20994-5d5d-4b11-8613-9f23ec96c4a1', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
         });
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoiftHq-lSNXLP4fUrkFro7FjhIyddxVI&libraries=places&callback=initAutocomplete" async defer></script>
+
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        // Replace form content with Thank You message
+        document.getElementById('step2').innerHTML = `
+          <h2>Thank You!</h2>
+          <p style="font-size:1.2em;">We're matching you with 3-5 certified roofers. Expect quotes within 15 minutes!</p>
+          <div style="margin:30px 0;">
+              <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" style="width:120px;">
+          </div>
+          <p>Need immediate help? Call or Text <strong>480-613-9666</strong></p>
+        `;
+        
+        // Fire conversion tracking event
+        gtag('event', 'conversion', {
+          'send_to': 'AW-11337578068/TY61CJPqpJ4aENTslp4q',
+          'value': 1.0,
+          'currency': 'USD'
+        });
+      } catch (error) {
+        console.error('Error:', error);
+        alert('There was an error submitting your request. Please try again.');
+      }
+    }
+
+    // Initialize form validation and Google Maps features
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('input, select').forEach(element => {
+        element.addEventListener('input', updateNextButton);
+      });
+      // Update ZIP code slide on input to trigger city/state lookup
+      document.getElementById('zipcode').addEventListener('input', function() {
+        updateNextButton();
+        geocodeZip();
+      });
+      initAutocomplete();
+    });
+  </script>
 </body>
 </html>
